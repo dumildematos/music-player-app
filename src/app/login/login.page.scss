@@ -1,0 +1,34 @@
+ion-content{
+  background-color: --ion-black-color;
+  #loginContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    h4{
+      font-family: 'BluesMalone';
+      margin-bottom: 20px;
+      font-size: 25px;
+    }
+    .form{
+      width: 90%;
+      ion-item{
+        margin: 5px;
+        border-radius: 40px;
+        ion-input{
+          text-align: center;
+        }
+      }
+      ion-button{
+        border-radius: 50px!important;
+        // margin: 0!important;
+        width: 95%;
+        align-items:center;
+        margin: 10px 0 0 6px;
+        background-color: --ion-red-color!important;
+      }
+    }
+  }
+}
