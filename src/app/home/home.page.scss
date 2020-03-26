@@ -29,3 +29,10 @@
 ion-content ion-toolbar {
   --background: translucent;
 }
+ion-content, ion-list, ion-item {
+  --background: var(--ion-black-color);
+  --ion-background-color: var(--ion-black-color);
+}
+.ion-color.sc-ion-label-md-h {
+  color: rgb(117, 117, 117);
+}

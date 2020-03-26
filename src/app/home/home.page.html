@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-    <h4 class="ion-padding-horizontal">Popular other Cards</h4>
+    <h4 class="ion-padding-horizontal">Popular</h4>
 
     <!-- this is a more narrow, thumb'isch card slider -->
     <ion-slides [options]="slideOptsThumbs">
@@ -38,4 +38,54 @@
       </ion-slide>
     </ion-slides>
 
+    <h4 class="ion-padding-horizontal">All Musics</h4>
+    <ion-list>
+      <ion-item  *ngFor="let track of playlist">
+
+        <ion-card button class="ion-text-start" (click)="start(track)"> 
+          <img [src]="track.thumb" alt="">
+          <ion-card-content>
+            <h5>{{ track.artist }}</h5>
+            <ion-label color="track == activeTrack ? 'success' : 'danger'">{{ track.title }}</ion-label>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-item>
+    </ion-list>
+
 </ion-content>
+
+<ion-footer *ngIf="activeTrack">
+  <ion-toolbar color="favorite">
+    <ion-row>
+
+      <ion-col size="12" class="ion-text-center">
+        {{ activeTrack.artist }} / {{ activeTrack.title }}
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-range #range ([ngModel])="progress" max="100" color="light" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+      </ion-col>
+
+      <ion-col size="12" class="ion-text-center">
+        
+        <ion-button fill="clear" (click)="prev()" color="light">
+          <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
+          <ion-icon slot="icon-only" name="pause"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="next()" color="light">
+          <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
