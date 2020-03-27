@@ -1,91 +1,50 @@
-
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Music Player
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-    <h4 class="ion-padding-horizontal">Popular</h4>
-
-    <!-- this is a more narrow, thumb'isch card slider -->
-    <ion-slides [options]="slideOptsThumbs">
-      <ion-slide>
-        <ion-card class="ion-text-start">
-          <img src="https://placem.at/people?overlay_color=feb75a&w=500&h=300">
-          <ion-card-content>
-            Card Info
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="ion-text-start">
-          <img src="https://placem.at/places?overlay_color=bec3af&w=500&h=300">
-          <ion-card-content>
-            Card Info
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card class="ion-text-start">
-          <img src="https://placem.at/things?overlay_color=7f9bf2&w=500&h=300">
-          <ion-card-content>
-            Card Info
-          </ion-card-content>
-        </ion-card>
-      </ion-slide>
-    </ion-slides>
-
-    <h4 class="ion-padding-horizontal">All Musics</h4>
+<ion-menu side="start" content-id="main-content">
+  <ion-header>
+    <ion-toolbar translucent>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-card>
+      <img src="https://placem.at/people?overlay_color=feb75a&w=500&h=300" />
+        <ion-card-title>Madison, WI</ion-card-title>
+    </ion-card>
     <ion-list>
-      <ion-item  *ngFor="let track of playlist">
-
-        <ion-card button class="ion-text-start" (click)="start(track)"> 
-          <img [src]="track.thumb" alt="">
-          <ion-card-content>
-            <h5>{{ track.artist }}</h5>
-            <ion-label color="track == activeTrack ? 'success' : 'danger'">{{ track.title }}</ion-label>
-          </ion-card-content>
-        </ion-card>
-
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">PROFILE</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">FAVORITES</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">ARTISTS</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">ALBUNS</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">PLAYLISTS</ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">POPULAR</ion-button>
+      </ion-item>      
+      <ion-item>
+        <ion-button color="danger" shape="round" expand="block">SETTINGS</ion-button>
       </ion-item>
     </ion-list>
+  </ion-content>
+</ion-menu>
 
-</ion-content>
+<div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Music Player</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-footer *ngIf="activeTrack">
-  <ion-toolbar color="favorite">
-    <ion-row>
+    <ion-router-outlet></ion-router-outlet>
 
-      <ion-col size="12" class="ion-text-center">
-        {{ activeTrack.artist }} / {{ activeTrack.title }}
-      </ion-col>
-
-      <ion-col size="12">
-        <ion-range #range ([ngModel])="progress" max="100" color="light" (touchend)="seek()" (mouseup)="seek()"></ion-range>
-      </ion-col>
-
-      <ion-col size="12" class="ion-text-center">
-        
-        <ion-button fill="clear" (click)="prev()" color="light">
-          <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
-        </ion-button>
-
-        <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
-          <ion-icon slot="icon-only" name="play"></ion-icon>
-        </ion-button>
-
-        <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
-          <ion-icon slot="icon-only" name="pause"></ion-icon>
-        </ion-button>
-
-        <ion-button fill="clear" (click)="next()" color="light">
-          <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
-        </ion-button>
-
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
-</ion-footer>
+</div>

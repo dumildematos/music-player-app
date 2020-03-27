@@ -33,6 +33,11 @@ ion-content, ion-list, ion-item {
   --background: var(--ion-black-color);
   --ion-background-color: var(--ion-black-color);
 }
+ion-item{
+  ion-button{
+    width: 100%;
+  }
+}
 .ion-color.sc-ion-label-md-h {
   color: rgb(117, 117, 117);
 }
