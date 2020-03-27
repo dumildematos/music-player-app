@@ -1,7 +1,9 @@
 import { Component, OnInit , ViewChild} from '@angular/core';
+import { IonRange } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { Howl } from 'howler';
 import { Track } from './../../models/track.interface';
-import { IonRange } from '@ionic/angular';
+import { PlayerModalPage } from './../player-modal/player-modal.page';
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -17,20 +19,20 @@ export class MainPage implements OnInit {
     {
       artist: 'Força Suprema',
       title: 'Deixa O Clima Rolar',
-      thumb: './assets/tracks/albuns/Forca_Suprema/cover.jpg',
-      path:'./assets/tracks/albuns/Forca_Suprema/05_Deixa_O_Clima_Rolar.mp3'
+      thumb: 'assets/tracks/albuns/Forca_Suprema/cover.jpg',
+      path:'assets/tracks/albuns/Forca_Suprema/05_Deixa_O_Clima_Rolar.mp3'
     },
     {
       artist: 'NGA',
       title: 'Quero o mundo',
-      thumb: './assets/tracks/albuns/NGA_KING/NGA-KING-DOWNLOAD.jpg',
-      path:'./assets/tracks/albuns/NGA_KING/12_Quero_o_mundo_ft_SP_Prod.mp3'
+      thumb: 'assets/tracks/albuns/NGA_KING/NGA-KING-DOWNLOAD.jpg',
+      path:'assets/tracks/albuns/NGA_KING/12_Quero_o_mundo_ft_SP_Prod.mp3'
     },
     {
       artist: 'Prodígio',
-      title: 'Deixa O Clima Rolar',
-      thumb: './assets/tracks/albuns/Prodígio_ProEvo2/cover.png',
-      path:'./assets/tracks/albuns/Prodígio_ProEvo2/06_O_Melhor.mp3'
+      title: 'O Melhor',
+      thumb: 'assets/tracks/albuns/Prodígio_ProEvo2/cover.png',
+      path:'assets/tracks/albuns/Prodígio_ProEvo2/06_O_Melhor.mp3'
     }
   ];
   activeTrack : Track = null;
@@ -38,9 +40,12 @@ export class MainPage implements OnInit {
   isPlaying = false;
   progress = 0;
   @ViewChild('range', { static: false }) range: IonRange;
-  constructor() { }
+  constructor(
+    public modalController: ModalController
+  ) { }
 
   ngOnInit() {
+    
   }
   start(track: Track) {
     
@@ -51,6 +56,7 @@ export class MainPage implements OnInit {
         src: [track.path],
         html5: true,  
         onplay: () => {
+          this.presentModal(track);
           this.isPlaying = true;
           this.activeTrack = track;
           this.updateProgress();
@@ -90,7 +96,7 @@ export class MainPage implements OnInit {
   }
 
   seek(){
-    let newValue = +this.range.value;
+    let newValue = +this.range;
     let duration = this.player.duration();
     this.player.seek(duration * (newValue / 100));
   }
@@ -103,6 +109,17 @@ export class MainPage implements OnInit {
       this.updateProgress();
       console.log(this.player.duration())
     },1000);
-    
   }
+
+  async presentModal(track: Track) {
+    const modal = await this.modalController.create({
+      component: PlayerModalPage,
+      componentProps: {
+        'track': track,
+        'playlist': this.playlist
+      }
+    });
+    return await modal.present();
+  }
+
 }
