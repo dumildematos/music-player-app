@@ -116,7 +116,10 @@ export class MainPage implements OnInit {
       component: PlayerModalPage,
       componentProps: {
         'track': track,
-        'playlist': this.playlist
+        'playlist': this.playlist,
+        'player': this.player,
+        'togglePlayer': this.togglePlayer('pause'),
+        'isPlaying': this.isPlaying
       }
     });
     return await modal.present();

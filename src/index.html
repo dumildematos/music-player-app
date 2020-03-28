@@ -16,10 +16,19 @@
   <!-- add to homescreen for ios -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <script src="https://unpkg.com/siriwave/dist/siriwave.js"></script>
+  <script>
+    var siriWave = new SiriWave({
+      container: document.getElementById('siri-container'),
+      width: 640,
+      height: 200,
+    });
+  </script>
 </head>
 
 <body>
   <app-root></app-root>
+
 </body>
 
 </html>

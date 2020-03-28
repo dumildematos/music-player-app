@@ -42,12 +42,35 @@ button{
   justify-content: center;
   align-items: center;
   .avatar-box{
-    width: 160px;
-    height: 160px;
+    width: 190px;
+    height: 190px;
+    .circle-inner{
+      position: absolute;
+      top: 25%;
+      left: 45%;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      --background: var(--ion-black-color);
+      --ion-background-color: var(--ion-black-color);
+      background-color: var(--ion-black-color);
+      -webkit-box-shadow: inset 2px 0px 5px -9px rgba(255, 255, 255, 0.144);
+      -moz-box-shadow: inset 2px 0px 5px -9px rgba(255, 255, 255, 0.144);
+      box-shadow: inset 2px 0px 5px -9px rgba(255,255,255,0.144);
+    }
     img{
       border-radius: 50%;
       width: 100%;
       height: 100%;
+      animation: rotation 3s infinite linear;
     }
+  }
+}
+@keyframes rotation {
+  from {
+      -webkit-transform: rotate(0deg);
+  }
+  to {
+      -webkit-transform: rotate(359deg);
   }
 }
