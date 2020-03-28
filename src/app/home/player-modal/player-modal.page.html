@@ -17,7 +17,40 @@
       <h3>{{ track.artist }}</h3>
       <p>{{ track.title }}</p>
     </div>
-    <div id="siri-container"></div>
   </ion-list>
 </div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar color="danger">
+    <ion-row>
+
+      <ion-col size="12" class="ion-text-center">
+        {{ activeTrack.artist }} / {{ activeTrack.title }}
+      </ion-col>
+
+      <ion-col size="12">
+        <ion-range #range ([ngModel])="progress" max="100" color="light" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+      </ion-col>
+
+      <ion-col size="12" class="ion-text-center">
+        
+        <ion-button fill="clear" (click)="prev()" color="light">
+          <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
+          <ion-icon slot="icon-only" name="play"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
+          <ion-icon slot="icon-only" name="pause"></ion-icon>
+        </ion-button>
+
+        <ion-button fill="clear" (click)="next()" color="light">
+          <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+        </ion-button>
+
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>
