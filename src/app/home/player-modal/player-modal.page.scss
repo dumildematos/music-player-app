@@ -3,6 +3,8 @@ ion-toolbar, ion-list{
   --ion-background-color: transparent;
   background-color: transparent;
 }
+
+
 #container{
   position: fixed;
   top: 0;
@@ -31,19 +33,39 @@ button{
   font-size: 12px;
 }
 .track-info{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  text-align: left;
+  h3,p{
+    --background: #000;
+  --ion-background-color: #000;
+  background-color: #000;
+  color: #fff;
+  text-align: left;
+  padding: 5px;
+  display: inline-block;
+  }
+  
 }
 .list-content{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  #freq{
+    width: 300px!important;
+    height: 500px!important;
+    p{
+      position: absolute;
+      top: 25%;
+      left: 45%;
+    }
+  }
   .avatar-box{
-    width: 190px;
-    height: 190px;
+    position: absolute;
+    top: 32%;
+    left: 32%;
+    width: 150px!important;
+    height: 150px!important;
+
     .circle-inner{
       position: absolute;
       top: 25%;
@@ -57,6 +79,7 @@ button{
       -webkit-box-shadow: inset 2px 0px 5px -9px rgba(255, 255, 255, 0.144);
       -moz-box-shadow: inset 2px 0px 5px -9px rgba(255, 255, 255, 0.144);
       box-shadow: inset 2px 0px 5px -9px rgba(255,255,255,0.144);
+      display: none;
     }
     img{
       border-radius: 50%;

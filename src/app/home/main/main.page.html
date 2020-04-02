@@ -29,8 +29,8 @@
   </ion-item>
 </ion-list>
 </ion-content>
-<ion-footer *ngIf="activeTrack">
-  <ion-toolbar color="danger">
+<ion-footer *ngIf="activeTrack" color="danger" (click)="presentModal(activeTrack)">
+  <!-- <ion-toolbar color="danger">
     <ion-row>
 
       <ion-col size="12" class="ion-text-center">
@@ -61,5 +61,20 @@
 
       </ion-col>
     </ion-row>
-  </ion-toolbar>
+  </ion-toolbar> -->
+
+  
+  <ion-list color="danger">
+    <div class="player-small">
+      <ion-item color="danger">
+        <ion-avatar slot="start">
+          <img [src]="activeTrack.thumb">
+        </ion-avatar>
+        <ion-label >
+          <h3>{{ activeTrack.artist }} </h3>
+          <p>{{ activeTrack.title }}</p>
+        </ion-label>
+      </ion-item>
+    </div>
+  </ion-list>
 </ion-footer>

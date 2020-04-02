@@ -41,3 +41,18 @@ ion-item{
 .ion-color.sc-ion-label-md-h {
   color: rgb(117, 117, 117);
 }
+ion-footer{
+  --background: var(--ion-color-danger)!important;
+  --ion-background-color: var(--ion-color-danger)!important;
+  background-color: var(--ion-color-danger)!important;
+  ion-list{
+    --background: transparent!important;
+    --ion-background-color: var(--ion-color-danger)!important;
+    background-color: var(--ion-color-danger)!important;
+    ion-item{
+      --background: var(--ion-color-danger)!important;
+      --ion-background-color: var(--ion-color-danger)!important;
+      background-color: var(--ion-color-danger)!important;
+    }
+  }
+}

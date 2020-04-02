@@ -56,13 +56,13 @@ export class MainPage implements OnInit {
         src: [track.path],
         html5: true,  
         onplay: () => {
-          this.presentModal(track);
+          // this.presentModal(track);
           this.isPlaying = true;
           this.activeTrack = track;
           this.updateProgress();
         },
         onend: () => {
-
+          console.log('finished')
         }
     });
 
@@ -107,7 +107,7 @@ export class MainPage implements OnInit {
     
     setTimeout(()=>{
       this.updateProgress();
-      console.log(this.player.duration())
+      
     },1000);
   }
 
