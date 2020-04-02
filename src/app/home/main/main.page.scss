@@ -5,6 +5,10 @@ ion-content, ion-list, ion-item {
   --background: var(--ion-black-color);
   --ion-background-color: var(--ion-black-color);
 }
+ion-toolbar{
+  --background: #000;
+  --ion-background-color: #000;
+}
 ion-card-content{
   --background: var(--ion-color-danger-shade)!important;
   --ion-background-color: var(--ion-color-danger-shade)!important;

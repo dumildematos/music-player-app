@@ -15,6 +15,31 @@ export class MainPage implements OnInit {
     spaceBetween: 0,
     slidesPerView: 2.65,
   };
+  category = [
+    { id: 1,
+      name: 'Rap'
+    },
+    {
+      id: 2,
+      name: 'R&B'
+    },
+    {
+      id: 3,
+      name: 'Indie'
+    },
+    {
+      id: 4,
+      name: 'Rock'
+    },
+    {
+      id: 4,
+      name: 'Hip Hop'
+    },
+    { 
+      id: 5,
+      name: 'Blues'
+    }
+  ];
   playlist: Track[] = [
     {
       artist: 'Força Suprema',

@@ -1,8 +1,14 @@
+<br><br><br><br>
+<ion-toolbar>
+  <ion-searchbar></ion-searchbar>
+</ion-toolbar>
 <ion-content class="ion-padding">
-<br><br>
 <h4 class="ion-padding-horizontal">Popular</h4>
 
-<!-- this is a more narrow, thumb'isch card slider -->
+<div class="category-container">
+  <ion-button *ngFor="let item of category" color="danger" shape="round" >#{{ item.name }}</ion-button>
+</div>
+
 <ion-slides [options]="slideOptsThumbs">
   <ion-slide *ngFor="let track of playlist" (click)="start(track)" button>
     <ion-card class="ion-text-start">
