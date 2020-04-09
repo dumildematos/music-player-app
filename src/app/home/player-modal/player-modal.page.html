@@ -9,17 +9,17 @@
     </ion-buttons>
   </ion-toolbar>
   <div class="track-info">
-    <h3>{{ track.artist }}</h3> <br>
+    <h3>{{ track.artist }}</h3>
     <p>{{ track.title }}</p>
   </div>
-
+  <!-- <input type="file" id="input" onchange="handleFiles(this.files)"/> -->
+  <button (click)="playSong()">Play</button>
   <ion-list center class="list-content">
     <canvas id="freq" width="200" height="200"></canvas>
     <div class="avatar-box">
       <img [src]="track.thumb">
       <div class="circle-inner"></div>
     </div>
-    <input type="file" id="input" onchange="handleFiles(this.files)"/>
    
   </ion-list>
 </div>

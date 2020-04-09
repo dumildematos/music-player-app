@@ -2,10 +2,8 @@ import { Howl } from 'howler';
 import { Track } from './../../models/track.interface';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { NavParams, ModalController, IonRange } from '@ionic/angular';
-import * as $ from "jquery";
-// declare function handleFiles(params:any) : any;
-declare var Alert;
-declare var handleFiles;
+// import * as $ from "jquery";
+declare var playSample;
 @Component({
   selector: 'app-player-modal',
   templateUrl: './player-modal.page.html',
@@ -19,7 +17,6 @@ export class PlayerModalPage implements OnInit {
   player: Howl = null;
   isPlaying = false;
   progress = 0;
-  @ViewChild('inputFile', { static: false }) inputFile;
   
   constructor(
     navParams: NavParams, 
@@ -30,8 +27,7 @@ export class PlayerModalPage implements OnInit {
 
   ngOnInit() {
     this.scripts();
-    this.loadFile();
-    console.log($('#input'))
+    // this.playSong();
   }
 
   dismiss() {
@@ -42,12 +38,8 @@ export class PlayerModalPage implements OnInit {
     });
   }
 
-  loadFile() {
-    document.getElementById('input').onchange(handleFiles(this.track.path));
-  }
-
-  callAlert(){
-    Alert('Dumilde');
+  playSong() {
+    playSample(this.track.path);
   }
 
   addJsToElement(src: string): HTMLScriptElement {
@@ -57,19 +49,11 @@ export class PlayerModalPage implements OnInit {
     this.elementRef.nativeElement.appendChild(script);
     return script;
   }
-  fileInput() {
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.onchange = handleFiles(this.track.path)
-    this.elementRef.nativeElement.appendChild(input);
-    return input;
-  }
   scripts() {
     this.addJsToElement('assets/js/jquery.min.js').onload = () => {};
     this.addJsToElement('assets/js/bufferloader.js').onload = () => {};
     this.addJsToElement('assets/js/id3-minimized.js').onload = () => {};
     this.addJsToElement('assets/js/audiovisualisierung.js').onload = () => {};
-
   }
 
 }

@@ -13,7 +13,7 @@ export class MainPage implements OnInit {
 
   slideOptsThumbs = {
     spaceBetween: 0,
-    slidesPerView: 2.65,
+    slidesPerView: 1.50,
   };
   category = [
     { id: 1,

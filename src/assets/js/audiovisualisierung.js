@@ -126,7 +126,7 @@ function handleFiles(files) {
 	$("button, input").prop("disabled",true);
 }
 
-function playSample() {
+function playSample(file) {
 	
 	fileChosen = true;
     setupAudioNodes();
@@ -138,7 +138,7 @@ function playSample() {
 	request.addEventListener("error", transferFailed);
 	request.addEventListener("abort", transferCanceled);
 	
-	request.open('GET', 'src/Infinite.mp3', true);
+	request.open('GET', file , true);
 	request.responseType = 'arraybuffer';
 
  	// When loaded decode the data

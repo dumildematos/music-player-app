@@ -14,6 +14,8 @@
 }
 ion-title{
   font-family: 'BluesMalone';
+  font-size: 12px;
+  margin-left: 8px;
 }
 ion-menu-button{
   color: #fff;
@@ -21,9 +23,7 @@ ion-menu-button{
 #container p {
   font-size: 16px;
   line-height: 22px;
-
   color: #8c8c8c;
-
   margin: 0;
 }
 
@@ -59,5 +59,30 @@ ion-footer{
       --ion-background-color: var(--ion-color-danger)!important;
       background-color: var(--ion-color-danger)!important;
     }
+  }
+}
+
+.ion-avatar{
+    width: 30px!important;
+    height: 30px!important;
+}
+.profile-card{
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQhTpTEu51TJgCAp_ncBv4JwjGrUYcDiLrKgfDpPSQpUSKl9u1r&usqp=CAU');
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 150px;
+  margin-top: -5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+  }
+  ion-card-title{
+    font-size: 14px;
   }
 }

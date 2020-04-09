@@ -6,22 +6,22 @@
 <h4 class="ion-padding-horizontal">Popular</h4>
 
 <div class="category-container">
-  <ion-button *ngFor="let item of category" color="danger" shape="round" >#{{ item.name }}</ion-button>
+  <button *ngFor="let item of category" color="danger" shape="round" class="categoryBtn" >#{{ item.name }}</button>
 </div>
 
-<ion-slides [options]="slideOptsThumbs">
-  <ion-slide *ngFor="let track of playlist" (click)="start(track)" button>
+<ion-slides [options]="slideOptsThumbs" class="ion-slides">
+  <ion-slide class="ion-slide" *ngFor="let track of playlist" (click)="start(track)" button>
     <ion-card class="ion-text-start">
       <img [src]="track.thumb" alt="">
       <ion-card-content>
-        {{ track.artist }} - {{ track.title }}
+        <span class="sld-inf">{{ track.artist }} - {{ track.title }}</span>
       </ion-card-content>
     </ion-card>
   </ion-slide>
 </ion-slides>
 
 <h4 class="ion-padding-horizontal">All Musics</h4>
-<ion-list>
+<ion-list class="all-music-list">
   <ion-item  *ngFor="let track of playlist">
 
     <ion-card button class="ion-text-start" (click)="start(track)"> 
