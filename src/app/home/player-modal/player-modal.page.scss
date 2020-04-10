@@ -46,6 +46,9 @@ ion-buttons{
   padding: 5px;
   display: inline-block;
   }
+  p{
+    margin-top: -1%;
+  }
   
 }
 .list-content{
@@ -53,19 +56,16 @@ ion-buttons{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  #freq{
-    width: 300px!important;
-    height: 500px!important;
-    p{
-      position: absolute;
-      top: 25%;
-      left: 45%;
-    }
-  }
+  // #freq{
+  //   width: 300px!important;
+  //   height: 500px!important;
+  //   p{
+  //     position: absolute;
+  //     top: 25%;
+  //     left: 45%;
+  //   }
+  // }
   .avatar-box{
-    position: absolute;
-    top: 32%;
-    left: 32%;
     width: 150px!important;
     height: 150px!important;
 

@@ -133,10 +133,10 @@ function playSample(file) {
 	
 	var request = new XMLHttpRequest();
 	
-	request.addEventListener("progress", updateProgress);
-	request.addEventListener("load", transferComplete);
-	request.addEventListener("error", transferFailed);
-	request.addEventListener("abort", transferCanceled);
+	// request.addEventListener("progress", updateProgress);
+	// request.addEventListener("load", transferComplete);
+	// request.addEventListener("error", transferFailed);
+	// request.addEventListener("abort", transferCanceled);
 	
 	request.open('GET', file , true);
 	request.responseType = 'arraybuffer';
@@ -144,11 +144,11 @@ function playSample(file) {
  	// When loaded decode the data
 	request.onload = function() {
 		
-		$("#title").html("Infinite");
-		$("#album").html("Infinite");
-		$("#artist").html("Valence");
-		onWindowResize();
-		$("#title, #artist, #album").css("visibility", "visible");
+		// $("#title").html("Infinite");
+		// $("#album").html("Infinite");
+		// $("#artist").html("Valence");
+		// onWindowResize();
+		// $("#title, #artist, #album").css("visibility", "visible");
 		
 		// decode the data
 		context.decodeAudioData(request.response, function(buffer) {
@@ -163,7 +163,7 @@ function playSample(file) {
 	};
 	request.send();
 	
-	$("button, input").prop("disabled",true);
+	// $("button, input").prop("disabled",true);
 }
 
 function useMic() 	
@@ -349,7 +349,7 @@ function drawBars (array) {
 	else if ($(window).width() < 500) {
 		bar_length_factor = 20.0;
 	}
-	console.log($(window).width());
+	// console.log($(window).width());
 	//go over each bin
 	for ( var i = 0; i < maxBinCount; i++ ){
 		

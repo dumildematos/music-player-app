@@ -8,7 +8,7 @@
 <div class="category-container">
   <button *ngFor="let item of category" color="danger" shape="round" class="categoryBtn" >#{{ item.name }}</button>
 </div>
-
+<br>
 <ion-slides [options]="slideOptsThumbs" class="ion-slides">
   <ion-slide class="ion-slide" *ngFor="let track of playlist" (click)="start(track)" button>
     <ion-card class="ion-text-start">
@@ -21,7 +21,7 @@
 </ion-slides>
 
 <h4 class="ion-padding-horizontal">All Musics</h4>
-<ion-list class="all-music-list">
+<!-- <ion-list class="all-music-list">
   <ion-item  *ngFor="let track of playlist">
 
     <ion-card button class="ion-text-start" (click)="start(track)"> 
@@ -33,7 +33,8 @@
     </ion-card>
 
   </ion-item>
-</ion-list>
+</ion-list> -->
+<canvas id="freq" width="200" height="200"></canvas>
 </ion-content>
 <ion-footer *ngIf="activeTrack" color="danger" (click)="presentModal(activeTrack)">
   <!-- <ion-toolbar color="danger">

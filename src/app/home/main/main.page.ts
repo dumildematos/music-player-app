@@ -1,9 +1,11 @@
-import { Component, OnInit , ViewChild} from '@angular/core';
+import { Component, OnInit , ViewChild, ElementRef} from '@angular/core';
 import { IonRange } from '@ionic/angular';
 import { ModalController } from '@ionic/angular';
 import { Howl } from 'howler';
 import { Track } from './../../models/track.interface';
 import { PlayerModalPage } from './../player-modal/player-modal.page';
+
+declare var playSample;
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -66,7 +68,8 @@ export class MainPage implements OnInit {
   progress = 0;
   @ViewChild('range', { static: false }) range: IonRange;
   constructor(
-    public modalController: ModalController
+    public modalController: ModalController,
+    private elementRef: ElementRef
   ) { }
 
   ngOnInit() {
@@ -77,7 +80,7 @@ export class MainPage implements OnInit {
     if(this.player)
       this.player.stop();
 
-    this.player = new Howl({
+      this.player = new Howl({
         src: [track.path],
         html5: true,  
         onplay: () => {
@@ -92,6 +95,8 @@ export class MainPage implements OnInit {
     });
 
     this.player.play();
+    // playSample(track.path)
+
   }
 
   togglePlayer(pause){
@@ -137,14 +142,32 @@ export class MainPage implements OnInit {
   }
 
   async presentModal(track: Track) {
+    
     const modal = await this.modalController.create({
       component: PlayerModalPage,
       componentProps: {
         'track': track,
-        'playlist': this.playlist
+        'playlist': this.playlist,
+        'controls': {
+          next: this.next(),
+          prev: this.prev()
+        }
       }
     });
     return await modal.present();
   }
 
+  addJsToElement(src: string): HTMLScriptElement {
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = src;
+    this.elementRef.nativeElement.appendChild(script);
+    return script;
+  }
+  scripts() {
+    this.addJsToElement('assets/js/jquery.min.js').onload = () => {};
+    this.addJsToElement('assets/js/bufferloader.js').onload = () => {};
+    this.addJsToElement('assets/js/id3-minimized.js').onload = () => {};
+    this.addJsToElement('assets/js/audiovisualisierung.js').onload = () => {};
+  }
 }

@@ -37,8 +37,11 @@ ion-content ion-toolbar {
 ion-content, ion-list, ion-item {
   --background: var(--ion-black-color);
   --ion-background-color: var(--ion-black-color);
+  background-color: var(--ion-black-color);
 }
 ion-item{
+  --ion-border-color: var(--ion-black-color);
+  border: none!important;
   ion-button{
     width: 100%;
   }

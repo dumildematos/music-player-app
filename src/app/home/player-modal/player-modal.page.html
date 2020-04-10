@@ -13,28 +13,46 @@
     <p>{{ track.title }}</p>
   </div>
   <!-- <input type="file" id="input" onchange="handleFiles(this.files)"/> -->
-  <button (click)="playSong()">Play</button>
+  <!-- <button (click)="playSong()">Play</button> -->
   <ion-list center class="list-content">
-    <canvas id="freq" width="200" height="200"></canvas>
+    <!-- <canvas id="freq" width="200" height="200"></canvas> -->
     <div class="avatar-box">
       <img [src]="track.thumb">
       <div class="circle-inner"></div>
     </div>
-   
+    
   </ion-list>
+
 </div>
+
 
 </ion-content>
 
-<!-- <ion-content>
+<ion-toolbar color="danger">
+  <ion-row>
 
+    <ion-col size="12">
+      <ion-range #range ([ngModel])="progress" max="100" color="light" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+    </ion-col>
 
-  <button id="playSampleButton" type="button" onClick="playSample()">Play Sample File</button>
-<button id="useMicButton" type="button" onClick="useMic()">Use Microphone</button>
-  <span id="loading"></span>
-  <div id="song_info_wrapper">
-  <div id="artist">Unknown Artist</div>
-  <div id="title">Unknown Titel</div>
-  <div id="album">Unknown Album</div>
-</div> 
-</ion-content> -->
+    <ion-col size="12" class="ion-text-center">
+      
+      <ion-button fill="clear" (click)="prev()" color="light">
+        <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
+        <ion-icon slot="icon-only" name="play"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
+        <ion-icon slot="icon-only" name="pause"></ion-icon>
+      </ion-button>
+
+      <ion-button fill="clear" (click)="controls.next" color="light">
+        <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+</ion-toolbar>
