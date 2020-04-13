@@ -1,7 +1,7 @@
-import { Howl } from 'howler';
 import { Track } from './../../models/track.interface';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { NavParams, ModalController, IonRange } from '@ionic/angular';
+import { Howl } from 'howler';
 // import * as $ from "jquery";
 declare var playSample;
 @Component({
@@ -13,24 +13,28 @@ export class PlayerModalPage implements OnInit {
 
   @Input() track: Track;
   @Input() playlist: Track[];
-  @Input() controls;
+  // @Input() controls;
   // @Input() spectrum;
   activeTrack : Track = null;
   player: Howl = null;
   isPlaying = false;
   progress = 0;
+  spinning = 'none';
+  // duration = this.player.duration();
   @ViewChild('range', { static: false }) range: IonRange;
   
   constructor(
     navParams: NavParams, 
     public modalController: ModalController,
     private elementRef: ElementRef) {
-    console.log(navParams.get('track'));
+    // console.log(navParams.get('track'));
   }
 
   ngOnInit() {
-    this.scripts();
+    // this.scripts();
     // this.playSong();
+    this.spinning = 'rotation 3s infinite linear';
+    this.start(this.track)
   }
 
   dismiss() {
@@ -40,23 +44,26 @@ export class PlayerModalPage implements OnInit {
       'dismissed': true
     });
   }
+  
   start(track: Track) {
     
-    if(this.player)
-      this.player.stop();
+    if(this.isPlaying){
+      console.log('playing')
+      this.player.stop(track.id);
+    }
 
-      this.player = new Howl({
-        src: [this.track.path],
-        html5: true,  
-        onplay: () => {
-          // this.presentModal(track);
-          this.isPlaying = true;
-          this.activeTrack = track;
-          this.updateProgress();
-        },
-        onend: () => {
-          console.log('finished')
-        }
+    this.player = new Howl({
+      src: [this.track.path],
+      html5: true,  
+      onplay: () => {
+        this.isPlaying = true;
+        this.activeTrack = track;
+        this.updateProgress();
+      },
+      onend: () => {
+        console.log('finished')
+        this.next();
+      }
     });
 
     this.player.play();
@@ -66,10 +73,15 @@ export class PlayerModalPage implements OnInit {
   togglePlayer(pause){
 
     this.isPlaying = !pause;
-    if(pause)
+    
+    if(pause){
       this.player.pause();
-    else
+      this.spinning = 'none';
+    }
+    else{
       this.player.play();
+      this.spinning = 'rotation 3s infinite linear';
+    }
 
   }
 
@@ -90,17 +102,21 @@ export class PlayerModalPage implements OnInit {
   }
 
   seek(){
-    let newValue = +this.range;
+    let newValue = +this.range.value / 100;
     let duration = this.player.duration();
-    this.player.seek(duration * (newValue / 100));
+    this.player.seek(duration * newValue);
   }
+
   updateProgress(){
-    let seek = this.player.seek();
-    this.progress = ((seek / this.player.duration()) * 100 ||0);
-    
+    let self = this;
+    let seek = this.player.seek() || 0;
+    let duration = this.player.duration() / 60;
+    // this.progress = ((seek / this.player.duration()) * 100 || 0);
+    // console.log({'duration':duration.toFixed(2)})
+    // console.log({'seek':seek,'duraction':duration})
+    // console.log({'progress':seek})
     setTimeout(()=>{
       this.updateProgress();
-      
     },1000);
   }
   addJsToElement(src: string): HTMLScriptElement {

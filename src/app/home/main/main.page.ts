@@ -5,7 +5,7 @@ import { Howl } from 'howler';
 import { Track } from './../../models/track.interface';
 import { PlayerModalPage } from './../player-modal/player-modal.page';
 
-declare var playSample;
+// declare var playSample;
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
@@ -44,29 +44,32 @@ export class MainPage implements OnInit {
   ];
   playlist: Track[] = [
     {
+      id: 1,
       artist: 'Força Suprema',
       title: 'Deixa O Clima Rolar',
       thumb: 'assets/tracks/albuns/Forca_Suprema/cover.jpg',
       path:'assets/tracks/albuns/Forca_Suprema/05_Deixa_O_Clima_Rolar.mp3'
     },
     {
+      id: 2,
       artist: 'NGA',
       title: 'Quero o mundo',
       thumb: 'assets/tracks/albuns/NGA_KING/NGA-KING-DOWNLOAD.jpg',
       path:'assets/tracks/albuns/NGA_KING/12_Quero_o_mundo_ft_SP_Prod.mp3'
     },
     {
+      id: 3,
       artist: 'Prodígio',
       title: 'O Melhor',
       thumb: 'assets/tracks/albuns/Prodígio_ProEvo2/cover.png',
       path:'assets/tracks/albuns/Prodígio_ProEvo2/06_O_Melhor.mp3'
     }
   ];
-  activeTrack : Track = null;
-  player: Howl = null;
-  isPlaying = false;
-  progress = 0;
-  @ViewChild('range', { static: false }) range: IonRange;
+  // activeTrack : Track = null;
+  // player: Howl = null;
+  // isPlaying = false;
+  // progress = 0;
+  // @ViewChild('range', { static: false }) range: IonRange;
   constructor(
     public modalController: ModalController,
     private elementRef: ElementRef
@@ -75,71 +78,71 @@ export class MainPage implements OnInit {
   ngOnInit() {
     
   }
-  start(track: Track) {
+  // start(track: Track) {
     
-    if(this.player)
-      this.player.stop();
+  //   if(this.player)
+  //     this.player.stop();
 
-      this.player = new Howl({
-        src: [track.path],
-        html5: true,  
-        onplay: () => {
-          // this.presentModal(track);
-          this.isPlaying = true;
-          this.activeTrack = track;
-          this.updateProgress();
-        },
-        onend: () => {
-          console.log('finished')
-        }
-    });
+  //     this.player = new Howl({
+  //       src: [track.path],
+  //       html5: true,  
+  //       onplay: () => {
+  //         // this.presentModal(track);
+  //         this.isPlaying = true;
+  //         this.activeTrack = track;
+  //         this.updateProgress();
+  //       },
+  //       onend: () => {
+  //         console.log('finished')
+  //       }
+  //   });
 
-    this.player.play();
-    // playSample(track.path)
+  //   this.player.play();
+  //   // playSample(track.path)
 
-  }
+  // }
 
-  togglePlayer(pause){
+  // togglePlayer(pause){
 
-    this.isPlaying = !pause;
-    if(pause)
-      this.player.pause();
-    else
-      this.player.play();
+  //   this.isPlaying = !pause;
+  //   if(pause)
+  //     this.player.pause();
+  //   else
+  //     this.player.play();
 
-  }
+  // }
 
-  next(){
-    let index = this.playlist.indexOf(this.activeTrack);
-    if(index != this.playlist.length - 1)
-      this.start(this.playlist[index + 1]);
-    else
-      this.start(this.playlist[0]);
-  }
+  // next(){
+  //   let index = this.playlist.indexOf(this.activeTrack);
+  //   if(index != this.playlist.length - 1)
+  //     this.start(this.playlist[index + 1]);
+  //   else
+  //     this.start(this.playlist[0]);
+  // }
 
-  prev(){
-    let index = this.playlist.indexOf(this.activeTrack);
-    if(index > 0)
-      this.start(this.playlist[index - 1]);
-    else
-      this.start(this.playlist[this.playlist.length - 1]);
-  }
+  // prev(){
+  //   let index = this.playlist.indexOf(this.activeTrack);
+  //   if(index > 0)
+  //     this.start(this.playlist[index - 1]);
+  //   else
+  //     this.start(this.playlist[this.playlist.length - 1]);
+  // }
 
-  seek(){
-    let newValue = +this.range;
-    let duration = this.player.duration();
-    this.player.seek(duration * (newValue / 100));
-  }
+  // seek(){
+  //   let newValue = +this.range;
+  //   let duration = this.player.duration();
+  //   this.player.seek(duration * (newValue / 100));
+  // }
 
-  updateProgress(){
-    let seek = this.player.seek();
-    this.progress = ((seek / this.player.duration()) * 100 ||0);
+  // updateProgress(){
+  //   let seek = this.player.seek();
+  //   this.progress = ((seek / this.player.duration()) * 100 ||0);
     
-    setTimeout(()=>{
-      this.updateProgress();
+  //   setTimeout(()=>{
+  //     this.updateProgress();
       
-    },1000);
-  }
+  //   },1000);
+  // }
 
   async presentModal(track: Track) {
     
@@ -147,27 +150,9 @@ export class MainPage implements OnInit {
       component: PlayerModalPage,
       componentProps: {
         'track': track,
-        'playlist': this.playlist,
-        'controls': {
-          next: this.next(),
-          prev: this.prev()
-        }
+        'playlist': this.playlist
       }
     });
     return await modal.present();
-  }
-
-  addJsToElement(src: string): HTMLScriptElement {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    this.elementRef.nativeElement.appendChild(script);
-    return script;
-  }
-  scripts() {
-    this.addJsToElement('assets/js/jquery.min.js').onload = () => {};
-    this.addJsToElement('assets/js/bufferloader.js').onload = () => {};
-    this.addJsToElement('assets/js/id3-minimized.js').onload = () => {};
-    this.addJsToElement('assets/js/audiovisualisierung.js').onload = () => {};
   }
 }

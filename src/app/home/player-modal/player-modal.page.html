@@ -15,10 +15,11 @@
   <!-- <input type="file" id="input" onchange="handleFiles(this.files)"/> -->
   <!-- <button (click)="playSong()">Play</button> -->
   <ion-list center class="list-content">
+
     <!-- <canvas id="freq" width="200" height="200"></canvas> -->
     <div class="avatar-box">
-      <img [src]="track.thumb">
-      <div class="circle-inner"></div>
+      <img [src]="track.thumb" [ngStyle]="{'animation': spinning}">
+      <!-- <div class="circle-inner"></div> -->
     </div>
     
   </ion-list>
@@ -32,7 +33,10 @@
   <ion-row>
 
     <ion-col size="12">
-      <ion-range #range ([ngModel])="progress" max="100" color="light" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+      <ion-range #range ([ngModel])="progress" min="0" max="100" color="light" (touchend)="seek()" (mouseup)="seek()">
+      </ion-range>
+      Progress : {{ progress }} <br>
+      isPlaying: {{ isPlaying }}
     </ion-col>
 
     <ion-col size="12" class="ion-text-center">
@@ -49,8 +53,8 @@
         <ion-icon slot="icon-only" name="pause"></ion-icon>
       </ion-button>
 
-      <ion-button fill="clear" (click)="controls.next" color="light">
-        <ion-icon slot="icon-only" name="skip-forward"></ion-icon>
+      <ion-button fill="clear" (click)="next()" color="light">
+        <ion-icon slot="icon-only" name="md-skip-forward"></ion-icon>
       </ion-button>
 
     </ion-col>

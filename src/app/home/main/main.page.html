@@ -10,7 +10,7 @@
 </div>
 <br>
 <ion-slides [options]="slideOptsThumbs" class="ion-slides">
-  <ion-slide class="ion-slide" *ngFor="let track of playlist" (click)="start(track)" button>
+  <ion-slide class="ion-slide" *ngFor="let track of playlist" (click)="presentModal(track)" button>
     <ion-card class="ion-text-start">
       <img [src]="track.thumb" alt="">
       <ion-card-content>
@@ -21,10 +21,10 @@
 </ion-slides>
 
 <h4 class="ion-padding-horizontal">All Musics</h4>
-<!-- <ion-list class="all-music-list">
+<ion-list class="all-music-list">
   <ion-item  *ngFor="let track of playlist">
 
-    <ion-card button class="ion-text-start" (click)="start(track)"> 
+    <ion-card button class="ion-text-start" (click)="presentModal(track)"> 
       <img [src]="track.thumb" alt="">
       <ion-card-content>
         <h5>{{ track.artist }}</h5>
@@ -33,10 +33,11 @@
     </ion-card>
 
   </ion-item>
-</ion-list> -->
-<canvas id="freq" width="200" height="200"></canvas>
+</ion-list>
+<!-- <canvas id="freq" width="200" height="200"></canvas> -->
 </ion-content>
-<ion-footer *ngIf="activeTrack" color="danger" (click)="presentModal(activeTrack)">
+
+<!-- <ion-footer *ngIf="activeTrack" color="danger" (click)="presentModal(activeTrack)"> -->
   <!-- <ion-toolbar color="danger">
     <ion-row>
 
@@ -71,7 +72,7 @@
   </ion-toolbar> -->
 
   
-  <ion-list color="danger">
+  <!-- <ion-list color="danger">
     <div class="player-small">
       <ion-item color="danger">
         <ion-avatar slot="start">
@@ -84,4 +85,4 @@
       </ion-item>
     </div>
   </ion-list>
-</ion-footer>
+</ion-footer> -->
