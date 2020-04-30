@@ -37,6 +37,7 @@ ion-buttons{
 }
 .track-info{
   text-align: left;
+  display: inline-block;
   h3,p{
     --background: #000;
   --ion-background-color: #000;
@@ -44,7 +45,6 @@ ion-buttons{
   color: #fff;
   text-align: left;
   padding: 5px;
-  display: inline-block;
   }
   p{
     margin-top: -1%;
@@ -65,13 +65,23 @@ ion-buttons{
   //     left: 45%;
   //   }
   // }
+
+  .controls{
+    display: flex!important;
+    justify-content: space-between;
+    align-content: space-between;
+    button{
+      background-color: transparent;
+      font-size: 12pt;
+    }
+  }
   .avatar-box{
     width: 150px!important;
     height: 150px!important;
 
     .circle-inner{
       position: absolute;
-      top: 25%;
+      top: 30%;
       left: 45%;
       width: 40px;
       height: 40px;
@@ -91,6 +101,20 @@ ion-buttons{
       animation: rotation 3s infinite linear;
     }
   }
+}
+.playerControls{
+  --background: red;
+  --ion-background-color: red;
+  ion-button{
+    --color: #fff;
+    --ion-color: #fff;
+    color: #fff;
+  }
+}
+.range-bar.range-bar-active{
+  --background: #fff!important;
+  --ion-background-color: #fff!important;
+  background-color: #fff!important;
 }
 @keyframes rotation {
   from {

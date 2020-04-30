@@ -1,6 +1,6 @@
 import { Track } from './../../models/track.interface';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { NavParams, ModalController, IonRange } from '@ionic/angular';
+import { NavParams, ModalController, IonRange,ActionSheetController  } from '@ionic/angular';
 import { Howl } from 'howler';
 // import * as $ from "jquery";
 declare var playSample;
@@ -20,13 +20,15 @@ export class PlayerModalPage implements OnInit {
   isPlaying = false;
   progress = 0;
   spinning = 'none';
+  prog = 0;
   // duration = this.player.duration();
   @ViewChild('range', { static: false }) range: IonRange;
   
   constructor(
     navParams: NavParams, 
     public modalController: ModalController,
-    private elementRef: ElementRef) {
+    private elementRef: ElementRef,
+    public actionSheetController: ActionSheetController) {
     // console.log(navParams.get('track'));
   }
 
@@ -34,6 +36,7 @@ export class PlayerModalPage implements OnInit {
     // this.scripts();
     // this.playSong();
     this.spinning = 'rotation 3s infinite linear';
+    console.log(this.playlist)
     this.start(this.track)
   }
 
@@ -47,10 +50,8 @@ export class PlayerModalPage implements OnInit {
   
   start(track: Track) {
     
-    if(this.isPlaying){
-      console.log('playing')
-      this.player.stop(track.id);
-    }
+    if(this.player)
+      this.player.stop();
 
     this.player = new Howl({
       src: [this.track.path],
@@ -87,18 +88,26 @@ export class PlayerModalPage implements OnInit {
 
   next(){
     let index = this.playlist.indexOf(this.activeTrack);
-    if(index != this.playlist.length - 1)
-      this.start(this.playlist[index + 1]);
-    else
-      this.start(this.playlist[0]);
+    if(index != this.playlist.length - 1){
+      this.track = this.playlist[index + 1]; 
+      this.start(this.track);
+    }else{
+      this.start(this.track);
+    }
   }
 
   prev(){
     let index = this.playlist.indexOf(this.activeTrack);
-    if(index > 0)
-      this.start(this.playlist[index - 1]);
+    if(index > 0){
+      this.track = this.playlist[index - 1]; 
+      this.start(this.track);
+    }
     else
-      this.start(this.playlist[this.playlist.length - 1]);
+    {
+      this.track = this.playlist[this.playlist.length - 1];
+      this.start(this.track);
+    }
+      
   }
 
   seek(){
@@ -108,17 +117,58 @@ export class PlayerModalPage implements OnInit {
   }
 
   updateProgress(){
-    let self = this;
-    let seek = this.player.seek() || 0;
+    let seek = this.player.seek();
+    this.progress = ((seek / this.player.duration()) * 100 ||0);;
     let duration = this.player.duration() / 60;
     // this.progress = ((seek / this.player.duration()) * 100 || 0);
     // console.log({'duration':duration.toFixed(2)})
-    // console.log({'seek':seek,'duraction':duration})
+    console.log({'seek':this.prog,'duraction':duration})
     // console.log({'progress':seek})
     setTimeout(()=>{
       this.updateProgress();
     },1000);
   }
+
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: `${this.track.title} - ${this.track.title}`,
+      buttons: [{
+        text: 'Related Album',
+        role: 'destructive',
+        icon: 'musical-notes-outline',
+        handler: () => {
+          console.log('Related Album');
+        }
+      }, {
+        text: 'Share',
+        icon: 'share',
+        handler: () => {
+          console.log('Share clicked');
+        }
+      }, {
+        text: `Comment  (77)`,
+        icon: 'chatbubbles-outline',
+        handler: () => {
+          console.log('Play clicked');
+        }
+      }, {
+        text: 'Favorite',
+        icon: 'heart',
+        handler: () => {
+          console.log('Favorite clicked');
+        }
+      }, {
+        text: 'Cancel',
+        icon: 'close',
+        role: 'cancel',
+        handler: () => {
+          console.log('Cancel clicked');
+        }
+      }]
+    });
+    await actionSheet.present();
+  }
+
   addJsToElement(src: string): HTMLScriptElement {
     const script = document.createElement('script');
     script.type = 'text/javascript';

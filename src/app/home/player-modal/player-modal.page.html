@@ -9,11 +9,10 @@
     </ion-buttons>
   </ion-toolbar>
   <div class="track-info">
-    <h3>{{ track.artist }}</h3>
+    <h3>{{ track.artist }}</h3> 
     <p>{{ track.title }}</p>
   </div>
-  <!-- <input type="file" id="input" onchange="handleFiles(this.files)"/> -->
-  <!-- <button (click)="playSong()">Play</button> -->
+  
   <ion-list center class="list-content">
 
     <!-- <canvas id="freq" width="200" height="200"></canvas> -->
@@ -21,42 +20,46 @@
       <img [src]="track.thumb" [ngStyle]="{'animation': spinning}">
       <!-- <div class="circle-inner"></div> -->
     </div>
+    <ion-grid>
+      <ion-row>
+
+        <ion-col size="12">
+          <ion-range #range ([ngModel])="progress" value="{{progress}}" min="0" max="100" color="light" (touchend)="seek()" (mouseup)="seek()">
+          </ion-range>
+        </ion-col>
+        <ion-col size="12" class="controls">
+            <button>
+              <ion-icon name="repeat-outline"></ion-icon>
+            </button>        
+            <button>
+              <ion-icon name="volume-high-outline"></ion-icon>
+            </button>        
+            <button (click)="presentActionSheet()">
+              <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+            </button>
+          </ion-col>
+        <ion-col size="12" class="ion-text-center playerControls">
+          
+          <ion-button fill="clear" (click)="prev()" color="light">
+            <ion-icon slot="icon-only" name="chevron-back-outline"></ion-icon>
+          </ion-button>
     
+          <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
+            <ion-icon slot="icon-only" name="play"></ion-icon>
+          </ion-button>
+    
+          <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
+            <ion-icon slot="icon-only" name="pause"></ion-icon>
+          </ion-button>
+    
+          <ion-button fill="clear" (click)="next()" color="light">
+            <ion-icon slot="icon-only" name="chevron-forward-outline"></ion-icon>
+          </ion-button>
+    
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-list>
 
 </div>
-
-
 </ion-content>
-
-<ion-toolbar color="danger">
-  <ion-row>
-
-    <ion-col size="12">
-      <ion-range #range ([ngModel])="progress" min="0" max="100" color="light" (touchend)="seek()" (mouseup)="seek()">
-      </ion-range>
-      Progress : {{ progress }} <br>
-      isPlaying: {{ isPlaying }}
-    </ion-col>
-
-    <ion-col size="12" class="ion-text-center">
-      
-      <ion-button fill="clear" (click)="prev()" color="light">
-        <ion-icon slot="icon-only" name="skip-backward"></ion-icon>
-      </ion-button>
-
-      <ion-button fill="clear" (click)="togglePlayer(false)" *ngIf="!isPlaying" color="light">
-        <ion-icon slot="icon-only" name="play"></ion-icon>
-      </ion-button>
-
-      <ion-button fill="clear" (click)="togglePlayer(true)" *ngIf="isPlaying" color="light">
-        <ion-icon slot="icon-only" name="pause"></ion-icon>
-      </ion-button>
-
-      <ion-button fill="clear" (click)="next()" color="light">
-        <ion-icon slot="icon-only" name="md-skip-forward"></ion-icon>
-      </ion-button>
-
-    </ion-col>
-  </ion-row>
-</ion-toolbar>
