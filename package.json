@@ -25,7 +25,7 @@
     "@ionic/angular": "^5.0.0",
     "core-js": "^2.5.4",
     "howler": "^2.1.3",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "rxjs": "~6.5.1",
     "siriwave": "^1.3.2",
     "tslib": "^1.9.0",
