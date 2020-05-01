@@ -17,11 +17,11 @@ export class PlayerModalPage implements OnInit {
   // @Input() spectrum;
   activeTrack : Track = null;
   player: Howl = null;
-  isPlaying = false;
+  isPlaying: boolean = false;
   progress = 0;
   spinning = 'none';
   prog = 0;
-  // duration = this.player.duration();
+  
   @ViewChild('range', { static: false }) range: IonRange;
   
   constructor(
@@ -36,22 +36,16 @@ export class PlayerModalPage implements OnInit {
     // this.scripts();
     // this.playSong();
     this.spinning = 'rotation 3s infinite linear';
-    console.log(this.playlist)
     this.start(this.track)
   }
 
   dismiss() {
-    // using the injected ModalController this page
-    // can "dismiss" itself and optionally pass back data
-    this.modalController.dismiss({
-      'dismissed': true
-    });
+    this.modalController.dismiss(this.track);
   }
   
   start(track: Track) {
-    
-    if(this.player)
-      this.player.stop();
+
+
 
     this.player = new Howl({
       src: [this.track.path],
@@ -119,11 +113,7 @@ export class PlayerModalPage implements OnInit {
   updateProgress(){
     let seek = this.player.seek();
     this.progress = ((seek / this.player.duration()) * 100 ||0);;
-    let duration = this.player.duration() / 60;
-    // this.progress = ((seek / this.player.duration()) * 100 || 0);
-    // console.log({'duration':duration.toFixed(2)})
-    console.log({'seek':this.prog,'duraction':duration})
-    // console.log({'progress':seek})
+
     setTimeout(()=>{
       this.updateProgress();
     },1000);
@@ -169,18 +159,18 @@ export class PlayerModalPage implements OnInit {
     await actionSheet.present();
   }
 
-  addJsToElement(src: string): HTMLScriptElement {
-    const script = document.createElement('script');
-    script.type = 'text/javascript';
-    script.src = src;
-    this.elementRef.nativeElement.appendChild(script);
-    return script;
-  }
-  scripts() {
-    this.addJsToElement('assets/js/jquery.min.js').onload = () => {};
-    this.addJsToElement('assets/js/bufferloader.js').onload = () => {};
-    this.addJsToElement('assets/js/id3-minimized.js').onload = () => {};
-    this.addJsToElement('assets/js/audiovisualisierung.js').onload = () => {};
-  }
+  // addJsToElement(src: string): HTMLScriptElement {
+  //   const script = document.createElement('script');
+  //   script.type = 'text/javascript';
+  //   script.src = src;
+  //   this.elementRef.nativeElement.appendChild(script);
+  //   return script;
+  // }
+  // scripts() {
+  //   this.addJsToElement('assets/js/jquery.min.js').onload = () => {};
+  //   this.addJsToElement('assets/js/bufferloader.js').onload = () => {};
+  //   this.addJsToElement('assets/js/id3-minimized.js').onload = () => {};
+  //   this.addJsToElement('assets/js/audiovisualisierung.js').onload = () => {};
+  // }
 
 }

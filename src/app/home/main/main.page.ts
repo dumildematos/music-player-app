@@ -65,6 +65,8 @@ export class MainPage implements OnInit {
       path:'assets/tracks/albuns/Prodígio_ProEvo2/06_O_Melhor.mp3'
     }
   ];
+  track : Track = null;
+  isReturn: boolean = false;
   // activeTrack : Track = null;
   // player: Howl = null;
   // isPlaying = false;
@@ -153,6 +155,14 @@ export class MainPage implements OnInit {
         'playlist': this.playlist
       }
     });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        // const user = data['data']; // Here's your selected user!
+        this.isReturn = true;
+        this.track = data['data'];
+    });
+
     return await modal.present();
   }
 }
